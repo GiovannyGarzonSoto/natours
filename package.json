@@ -4,11 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sass": "node-sass sass/main.scss css/style.css -w"
+    "watch:sass": "node-sass sass/main.scss css/style.css -w",
+   
+    "compile:sass": "node-sass sass/main.scss css/style.comp.css",
+    "concat:css": "concat -o css/style.concat.css css/icon-font.css css/style.comp.css",
+    "prefix:css": "postcss-cli --use autoprefixer -b 'last 5 versions' css/style.concat.css -o css/style.prefix.css",
+    "compress:css": "node-sass css/style.concat.css css/style.css --output-style compressed",
+
+    "build": "npm run watch:sass && npm run compile:sass"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "node-sass": "^4.13.0"
+    "autoprefixer": "^9.7.4",
+    "concat": "^1.0.3",
+    "node-sass": "^4.13.0",
+    "postcss-cli": "^4.1.1"
   }
 }
